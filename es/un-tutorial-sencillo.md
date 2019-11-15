@@ -22,7 +22,7 @@ También es posible descargar los ficheros fuente por separado e insertarlos ind
 ...
 ```
 
-### Sesiones
+## Sesiones
 
 Todos los métodos de Tau Prolog están contenidos en un objeto JavaScript llamado `pl`, que es visible en el ámbito global bajo el objeto `window` (`global` en Node.js).
 
@@ -34,7 +34,7 @@ var session = pl.create();
 
 Esta función acepta un parámetro opcional `limit`, que indica el número máximo de pasos de resolución que puede dar el intérprete para encontrar una respuesta. Esto evita que el navegador se bloquee, ya sea porque el intérprete tarde mucho en encontrar una respuesta, o porque haya entrado en una rama infinita. Si al buscar una respuesta el intérprete devuelve `null`, indica que se han ejecutado el límite establecido de pasos de resolución sin hallar ninguna respuesta; no obstante, si se vuelve a solicitar una respuesta Tau Prolog seguirá buscando desde el último punto de elección. El valor por defecto es `1000`.
 		
-# Cargar programas y módulos
+## Cargar programas y módulos
 
 Para analizar y cargar programas en una sesión, el prototipo `pl.type.Session` disponde del método `consult`, que recibe un programa en forma de cadena de caracteres y, si todo va bien, añade las reglas analizadas a la base de datos de la sesión y devuelve `true`.
 
