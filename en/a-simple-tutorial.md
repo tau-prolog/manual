@@ -1,7 +1,7 @@
 # A simple tutorial
 
 ## What is Tau Prolog?
-Tau Prolog is a Prolog interpreter fully implemented in JavaScript. Tau Prolog is not just an implementation of the logic programming resolution mechanism, but a complete Prolog interpreter. Furthermore, the implementation of this interpreter has been directed by the ISO Prolog Standard (see [ISO Prolog: A Summary of the Draft Proposed Standard](http://fsl.cs.illinois.edu/images/9/9c/PrologStandard.pdf), [ISO directives, control constructs and builtins](http://www.deransart.fr/prolog/bips.html), [ISO Prolog Conformity Testing](http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing)).
+Tau Prolog is a Prolog interpreter fully implemented in JavaScript. Tau Prolog is not just an implementation of the logic programming resolution mechanism, but a complete Prolog interpreter. Furthermore, the implementation of this interpreter has been directed by the ISO Prolog Standard *(see [ISO Prolog: A Summary of the Draft Proposed Standard](http://fsl.cs.illinois.edu/images/9/9c/PrologStandard.pdf), [ISO directives, control constructs and builtins](http://www.deransart.fr/prolog/bips.html), [ISO Prolog Conformity Testing](http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing))*.
 
 What makes Tau Prolog special regarding other server-side interpreters is its **integration with web pages' elements**. Tau Prolog installation is quick and simple: you only need to add a JavaScript file to the header of the web page in which it's intended to be run. On [Downloads](http://tau-prolog.org/downloads), you can download a single customized file including Tau Prolog's core and the modules you may require.
 
@@ -57,7 +57,7 @@ if( parsed !== true ) {
 }
 ```
 
-Errors are generated as Prolog terms ***(see [Prototypes and Prolog objects](http://tau-prolog.org/manual/prototypes-and-prolog-objects) from Tau Prolog manual)***, with information about where has the error been raised (line and column), the found token (if any) and the next expected character.
+Errors are generated as Prolog terms *(see [Prototypes and Prolog objects](http://tau-prolog.org/manual/prototypes-and-prolog-objects) from Tau Prolog manual)*, with information about where has the error been raised (line and column), the found token (if any) and the next expected character.
         
 ## Queries and goals
 
@@ -76,7 +76,7 @@ session.answer( callback ); // {X/banana}
 session.answer( callback ); // false
 ```
 
-If an answer is found, this will be returned inside a `pl.type.Substitution` object, where every variable of the goal is linked to a value. The `pl.type.Substitution` prototype includes a `toString` method which returns the substitution as a string in the format `{X/a, Y/b, Z/c, ...}` ***(see [Prototypes and Prolog objects](http://tau-prolog.org/manual/prototypes-and-prolog-objects) from Tau Prolog manual)***. Another way to express a substitution as a string is the `format_answer` method in `pl`, which receives a substitution object and returns a string in the format `X = a, Y = b, Z = c, ... ;`, or `true ;` if the `Substitution` object has no variables.
+If an answer is found, this will be returned inside a `pl.type.Substitution` object, where every variable of the goal is linked to a value. The `pl.type.Substitution` prototype includes a `toString` method which returns the substitution as a string in the format `{X/a, Y/b, Z/c, ...}` *(see [Prototypes and Prolog objects](http://tau-prolog.org/manual/prototypes-and-prolog-objects) from Tau Prolog manual)*. Another way to express a substitution as a string is the `format_answer` method in `pl`, which receives a substitution object and returns a string in the format `X = a, Y = b, Z = c, ... ;`, or `true ;` if the `Substitution` object has no variables.
 
 ```javascript
 var callback = function( answer ) { console.log( pl.format_answer( answer ) ); };
