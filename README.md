@@ -1,2 +1,3 @@
-# manual
-Get Started with Tau Prolog
+# Get started with Tau Prolog
+
+* [A simple tutorial](en/a-simple-tutorial.md)
