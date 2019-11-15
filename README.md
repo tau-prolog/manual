@@ -1,5 +1,5 @@
 # Get started with Tau Prolog
 
-* [A simple tutorial](en/a-simple-tutorial.md) *([ES](es/un-tutorial-sencillo.md), [EN](en/a-simple-tutorial.md))*
-* [Compatibility with Node.js](en/compatibility-with-nodejs.md) *([ES](es/compatibilidad-con-nodejs.md), [EN](en/compatibility-with-nodejs.md)*
-* [Manipulating the DOM with Prolog](en/manipulating-the-dom-with-prolog.md)
+* [A simple tutorial](en/a-simple-tutorial.md) **([es](es/un-tutorial-sencillo.md), [en](en/a-simple-tutorial.md))**
+* [Compatibility with Node.js](en/compatibility-with-nodejs.md) **([es](es/compatibilidad-con-nodejs.md), [en](en/compatibility-with-nodejs.md))**
+* [Manipulating the DOM with Prolog](en/manipulating-the-dom-with-prolog.md) **([es](es/manipulando-el-dom-con-prolog.md), [en](en/manipulating-the-dom-with-prolog.md))**
