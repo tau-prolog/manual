@@ -85,4 +85,4 @@ session.answer( callback ); // X = banana ;
 session.answer( callback ); // false.
 ```
 
-If the interpreter doesn't find an answer, it will call the callback with either `false` or `null`: `false` if there wasn't an answer in the whole database, `null` if the interpreter hasn't found an answer within the resolution steps limit. If the returned value is `>null` and you try to find an answer again, the interpreter will keep looking for answers from the point where it reached the limit last time.
+If the interpreter doesn't find an answer, it will call the callback with either `false` or `null`: `false` if there wasn't an answer in the whole database, `null` if the interpreter hasn't found an answer within the resolution steps limit. If the returned value is `null` and you try to find an answer again, the interpreter will keep looking for answers from the point where it reached the limit last time.
