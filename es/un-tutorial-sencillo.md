@@ -2,7 +2,7 @@
 
 ## ¿Qué es Tau Prolog?
 
-Tau Prolog es un intérprete de Prolog implementado completamente en JavaScript. No es simplemente una implementación del mecanismo de resolución de la lógica de predicados, sino una implementación de Prolog guiada por el estándar ISO Prolog *(véase [ISO Prolog: A Summary of the Draft Proposed Standard](http://fsl.cs.illinois.edu/images/9/9c/PrologStandard.pdf), [ISO directives, control constructs and builtins](http://www.deransart.fr/prolog/bips.html),[ISO Prolog Conformity Testing](http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing))*.
+Tau Prolog es un intérprete de Prolog implementado completamente en JavaScript. No es simplemente una implementación del mecanismo de resolución de la lógica de predicados, sino una implementación de Prolog guiada por el estándar ISO Prolog *(véase [ISO Prolog: A Summary of the Draft Proposed Standard](http://fsl.cs.illinois.edu/images/9/9c/PrologStandard.pdf), [ISO directives, control constructs and builtins](http://www.deransart.fr/prolog/bips.html), [ISO Prolog Conformity Testing](http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing))*.
 
 Lo que distingue a Tau Prolog de otros intérpretes ejecutados en el lado del servidor, es su capacidad de integración e interacción con los elementos de las páginas web. La instalación de Tau Prolog es muy sencilla, sólo hay que incluir un fichero JavaScript en la cabecera de la página web donde se pretende ejecutar. En la sección [Descargas](http://tau-prolog.org/downloads) es posible descargar un único fichero personalizado que incluya el núcleo del intérprete junto a los módulos requeridos.
 		
