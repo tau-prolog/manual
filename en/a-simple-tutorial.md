@@ -33,10 +33,10 @@ This function can receive an optional argument `limit` which limits the number o
         
 ## Load programs and modules
 
-With the aim of analysing and loading programs in a session, the `pl.type.Session` prototype includes a `consult` method, which receives the program as a string and, if it is correct, adds the rules on it to the database, returning `true` afterwards.
+With the aim of analysing and loading programs in a session, the `pl.type.Session` prototype includes a `consult` method, which receives the program as a string and, if it is correct, adds the rules on it to the database, executing a given callback afterwards. The `consult` method can take a string with the Prolog program, an URL/path to a Prolog file, or the identifer `id` of a `<script>` tag with `id="{id}.pl"` and `type="text/prolog"`.
 
 ```javascript
-var parsed = session.consult("                   \
+session.consult("                   \
     % load lists module                          \
     :- use_module(library(lists)).               \
                                                  \
@@ -45,44 +45,89 @@ var parsed = session.consult("                   \
                                                  \
     % fruits_in/2                                \
     fruits_in(Xs, X) :- member(X, Xs), fruit(X). \
-"); // true
+", {
+    success: function() { /* Program parsed correctly */ },
+    error: function(err) { /* Error parsing program */ }
+});
 ```
 Now, after parsing that program, `session` contains three facts defining the `fruit/1` predicate and a rule defining the `fruits_in/2` predicate. `member/2` is a predicate from `lists` module, so we need to import it using the `use_module` directive. This way, the predicates implemented on the `lists` module will be available in this session.
-
-Let's suppose that we forgot to write a dot after `fruit(banana)`. In this case, the interpreter would load the `lists` and the first two `fruit/1` facts, but after reaching the third fact it would stop parsing and return an error. To discover if there has been an error while parsing, we must check that the returned value is strictly (`===`, `!==`) distinct from `true`.
-
-```javascript
-if( parsed !== true ) {
-    console.log( parsed ); // throw(error(syntax_error(line(8), column(1), found(fruits_in), cause('. or expression expected'))))
-}
-```
 
 Errors are generated as Prolog terms *(see [Prototypes and Prolog objects](http://tau-prolog.org/manual/prototypes-and-prolog-objects) from Tau Prolog manual)*, with information about where has the error been raised (line and column), the found token (if any) and the next expected character.
         
 ## Queries and goals
 
-We can query the database to check if a goal is true or not. In order to do so, we must first add the said goal to the states pile and, later, check for facts and/or rules which satisfy that goal. The `pl.type.Session` prototype has a `query` method, which receives a goal as a string and, after adding the goal to the states pile, returns (if there were no problems) `true`.
+We can query the database to check if a goal is true or not. In order to do so, we must first add the said goal to the stack of choice points and, later, check for answers. The `pl.type.Session` prototype has a `query` method, which receives a goal as a string and, after adding the goal to the stack, executes a callback.
 
 ```javascript
-var parsed = session.query("fruits_in([carrot, apple, banana, broccoli], X)."); // true
+session.query("fruits_in([carrot, apple, banana, broccoli], X).", {
+    success: function(goal) { /* Goal parsed correctly */ },
+    error: function(err) { /* Error parsing goal */ }
+});
 ```
 
-Once the goal has been added to the pile, the `answer` method in `pl.type.Session` allows us to look for answers (facts or rules) which make the goal true. Tau Prolog is **asynchronous**, which means that `answer` will not return the results, but call a callback function if it finds something. This feature gives the Prolog predicates the ability to make asynchronous operations, as sleeping the execution or to make Ajax queries. In this case, the callback is given to `answer` as an argument.
+Once the goal has been added to the stack, the `answer` method in `pl.type.Session` allows us to look for answers (facts or rules) which make the goal true. Tau Prolog is **asynchronous**, which means that `answer` will not return the results, but call a callback function if it finds something. This feature gives the Prolog predicates the ability to make asynchronous operations, as sleeping the execution or to make Ajax queries. In this case, the callback is given to `answer` as an argument.
 
 ```javascript
-var callback = console.log;
-session.answer( callback ); // {X/apple}
-session.answer( callback ); // {X/banana}
-session.answer( callback ); // false
+session.answer({
+    success: function(answer) {
+        console.log(answer); // {X/apple}
+        session.answer({
+            success: function(answer) {
+                console.log(answer); // {X/banana}
+            },
+            // error, fail, limit
+        });
+    },
+    error: function(err) { /* Uncaught error */ },
+    fail:  function() { /* No more answers */ },
+    limit: function() { /* Limit exceeded */ }
+});
 ```
 
-If an answer is found, this will be returned inside a `pl.type.Substitution` object, where every variable of the goal is linked to a value. The `pl.type.Substitution` prototype includes a `toString` method which returns the substitution as a string in the format `{X/a, Y/b, Z/c, ...}` *(see [Prototypes and Prolog objects](http://tau-prolog.org/manual/prototypes-and-prolog-objects) from Tau Prolog manual)*. Another way to express a substitution as a string is the `format_answer` method in `pl`, which receives a substitution object and returns a string in the format `X = a, Y = b, Z = c, ... ;`, or `true ;` if the `Substitution` object has no variables.
+If an answer is found, this will be returned inside a `pl.type.Substitution` object, where every variable of the goal is linked to a value. The `pl.type.Substitution` prototype includes a `toString` method which returns the substitution as a string in the format `{X/a, Y/b, Z/c, ...}` *(see [Prototypes and Prolog objects](http://tau-prolog.org/manual/prototypes-and-prolog-objects) from Tau Prolog manual)*. Another way to express a substitution as a string is the `format_answer` method in `Session`, which receives a substitution object and returns a string in the format `X = a, Y = b, Z = c, ...`, or `true` if the `Substitution` object has no variables.
 
 ```javascript
-var callback = function( answer ) { console.log( pl.format_answer( answer ) ); };
-session.answer( callback ); // X = apple ;
-session.answer( callback ); // X = banana ;
-session.answer( callback ); // false.
+var show = function(answer) {
+    console.log(
+        session.format_answer(answer)
+    );
+};
+session.answer({
+    success: function(answer) {
+        show(answer); // X = apple ;
+        session.answer({
+            success: function(answer) {
+                show(answer); // X = banana ;
+            },
+            // error, fail, limit
+        });
+    },
+    // error, fail, limit
+});
 ```
 
-If the interpreter doesn't find an answer, it will call the callback with either `false` or `null`: `false` if there wasn't an answer in the whole database, `null` if the interpreter hasn't found an answer within the resolution steps limit. If the returned value is `null` and you try to find an answer again, the interpreter will keep looking for answers from the point where it reached the limit last time.
+Note that you can pass a generic callback instead of an object with all these methods. If the interpreter doesn't find an answer, it will call the callback with either `false` or `null`: `false` if there wasn't an answer in the whole database, `null` if the interpreter hasn't found an answer within the resolution steps limit. If the returned value is `null` and you try to find an answer again, the interpreter will keep looking for answers from the point where it reached the limit last time.
+
+This is a general scheme of how to use Tau Prolog:
+
+```javascript
+// Consult
+session.consult(program, {
+    success: function() {
+        // Query
+        session.query(goal, {
+            success: function(goal) {
+                // Answers
+                session.answer({
+                    success: function(answer) { /* Answer */ },
+                    error:   function(err) { /* Uncaught error */ },
+                    fail:    function() { /* Fail */ },
+                    limit:   function() { /* Limit exceeded */ }
+                })
+            },
+            error: function(err) { /* Error parsing goal */ }
+        });
+    },
+    error: function(err) { /* Error parsing program */ }
+});
+```
