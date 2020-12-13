@@ -33,7 +33,7 @@ This function can receive an optional argument `limit` which limits the number o
         
 ## Load programs and modules
 
-With the aim of analysing and loading programs in a session, the `pl.type.Session` prototype includes a `consult` method, which receives the program as a string and, if it is correct, adds the rules on it to the database, executing a given callback afterwards. The `consult` method can take a string with the Prolog program, an URL/path to a Prolog file, or the identifer `id` of a `<script>` tag with `id="{id}.pl"` and `type="text/prolog"`.
+With the aim of analysing and loading programs in a session, the `pl.type.Session` prototype includes a `consult` method, which receives the program as a string and, if it is correct, adds the rules on it to the database, executing a given callback afterwards. The `consult` method can take a string with the Prolog program, an URL/path to a Prolog file, or the identifier `id` of a `<script>` tag with `id="{id}.pl"` and `type="text/prolog"`.
 
 ```javascript
 session.consult("                   \
