@@ -41,7 +41,7 @@ require("tau-prolog/modules/promises.js")(pl);
 
 ## Tau Prolog using Observables
 
-Note that it is possible to use the promises interface together with reactive programming libraries, if they support the conversion of asynchronous generator functions to observables, such as `RxJS` from version` 7.0.0`.
+Note that it is possible to use the promises interface together with reactive programming libraries, if they support the conversion of asynchronous generator functions to observables, such as `RxJS` from version `7.0.0`.
 
 ```javascript
 const Rx = require("rxjs");
@@ -56,10 +56,10 @@ require("tau-prolog/modules/promises.js")(pl);
     `;
     const goal = "plus(X, Y, s(s(s(z)))).";
     const session = pl.create();
-    await session.asyncConsult(program);
-    await session.asyncQuery(goal);
+    await session.promiseConsult(program);
+    await session.promiseQuery(goal);
 
-    const plus = Rx.from(session.asyncAnswers());
+    const plus = Rx.from(session.promiseAnswers());
     plus.subscribe(x => console.log(session.format_answer(x)));
     // X = z, Y = s(s(s(z))) ;
     // X = s(z), Y = s(s(z)) ;

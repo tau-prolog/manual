@@ -4,4 +4,5 @@
 * [Compatibility with Node.js](en/compatibility-with-nodejs.md) **([es](es/compatibilidad-con-nodejs.md), [en](en/compatibility-with-nodejs.md))**
 * [Manipulating the DOM with Prolog](en/manipulating-the-dom-with-prolog.md) **([es](es/manipulando-el-dom-con-prolog.md), [en](en/manipulating-the-dom-with-prolog.md))**
 * [Making your own packages](en/making-your-own-packages.md) **([es](es/creando-tus-propios-paquetes.md), [en](en/making-your-own-packages.md))**
+* [Prototypes and Prolog objects](en/prototypes-and-prolog-objects.md) **([es](es/prototipos-y-objetos-prolog.md), [en](en/prototypes-and-prolog-objects.md))**
 * [Promises interface](en/promises-interface.md) **([es](es/interfaz-de-promesas.md), [en](en/promises-interface.md))**
