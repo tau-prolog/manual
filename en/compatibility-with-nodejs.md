@@ -9,7 +9,7 @@ Tau Prolog is ready to be used with either Node.js or a browser seamlessly. In t
 In order to import Tau Prolog, we'll use the Node.js function `require`:
 
 ```javascript
-var pl = require( "tau-prolog" );
+var pl = require("tau-prolog");
 ```
 
 The whole functionality of Tau Prolog is inside a JavaScript object called `pl`. This variable could have any name, but, for the sake of compatibility with the browser version, it is recommended to keep the original name, `pl`. From now on, the library can be used just as it is described in other sections of this manual *(see [A simple tutorial](http://tau-prolog.org/manual/a-simple-tutorial))*, excluding the importation tasks.

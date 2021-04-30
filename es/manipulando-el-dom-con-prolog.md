@@ -1,6 +1,6 @@
 # Manipulando el DOM con Prolog
 
-El módulo`dom` de Tau Prolog incorpora nuevos tipos de términos y predicados para la manipulación del DOM y la gestión de los eventos del navegador. Puedes encontrar más información sobre estos predicados en los [predicados de referencia del módulo dom](http://tau-prolog.org/documentation#dom).
+El módulo `dom` de Tau Prolog incorpora nuevos tipos de términos y predicados para la manipulación del DOM y la gestión de los eventos del navegador. Puedes encontrar más información sobre estos predicados en los [predicados de referencia del módulo dom](http://tau-prolog.org/documentation#dom).
 
 ## Selectores
 
