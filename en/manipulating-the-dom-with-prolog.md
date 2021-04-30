@@ -20,18 +20,33 @@ If there are no elements in the DOM with the specified identifier, class or tag,
 
 ```javascript
 var session = pl.create();
-session.consult(":- use_module(library(dom)).");
+session.consult(":- use_module(library(dom)).", {
+	success: function() {
+		session.query("get_by_tag(div, B), html(B, X).", {
+			success: function() {
+				session.answer(console.log); // {B/<html>(block-a), X/'content a'}
+				session.answer(console.log); // {B/<html>(block-b), X/'content b'}
+				session.answer(console.log); // {B/<html>(block-c), X/'content c'}
+				session.answer(console.log); // false
+			}
+		});
+	}
+});
+```
 
-session.query("get_by_tag(div, B), html(B, X).");
-session.answer(); // {B/<html>(block-a), X/'content a'}
-session.answer(); // {B/<html>(block-b), X/'content b'}
-session.answer(); // {B/<html>(block-c), X/'content c'}
-session.answer(); // false
-
-session.query("get_by_class(circle, B), html(B, X).");
-session.answer(); // {B/<html>(block-a), X/'content a'}
-session.answer(); // {B/<html>(block-b), X/'content b'}
-session.answer(); // false
+```javascript
+var session = pl.create();
+session.consult(":- use_module(library(dom)).", {
+	success: function() {
+		session.query("get_by_class(circle, B), html(B, X).", {
+			success: function() {
+				session.answer(console.log); // {B/<html>(block-a), X/'content a'}
+				session.answer(console.log); // {B/<html>(block-b), X/'content b'}
+				session.answer(console.log); // false
+			}
+		});
+	}
+});
 ```
 
 The `dom` module also includes predicates to go through the DOM starting at the HTML objects retrieved with the previous predicates.
@@ -71,13 +86,18 @@ Tau Prolog's `dom` module also enables the dynamic assignation of events, in ord
 
 ```javascript
 var session = pl.create();
-session.consult(":- use_module(library(dom)).");
-
-session.query("get_by_id(output, Output), get_by_tag(body, B), bind(B, keypress, Event, ( \
-	event_property(Event, key, Key),                                                      \
-	html(Output, Key)                                                                     \
-)).");
-session.answer(); // {Output/<html>(output), Body/<html>(body), Event/<event>(keypress)}
+session.consult(":- use_module(library(dom)).", {
+	success: function() {
+		session.query("get_by_id(output, Output), get_by_tag(body, B), bind(B, keypress, Event, ( \
+			event_property(Event, key, Key),                                                      \
+			html(Output, Key)                                                                     \
+		)).", {
+			success: function() {
+				session.answer(console.log); // {Output/<html>(output), Body/<html>(body), Event/<event>(keypress)}
+			}
+		});
+	}
+});
 ```
 
 In this example, the `keypress` event has been added to the page body, so when a key is pressed, the HTML object whose id is `output` shows what key has been pressed. Notice that the [event_property/3](http://www.tau-prolog.org/documentation/prolog/dom/event_property/3) predicate and the `Event` term only make sense inside an event's goal, since they don't hold any information until the event is triggered. Any time an event is triggered, Tau Prolog creates a new thread in the session that assigned the event and runs the goal (just for the first answer).
