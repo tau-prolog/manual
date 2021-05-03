@@ -2,8 +2,6 @@
 
 Una promesa es un objeto que representa la terminación o el fracaso de una operación asíncrona. El paquete `promises` de Tau Prolog extiende los prototipos de `pl.type.Session` y `pl.type.Thread` para añadir nuevos métodos para cargar programas y consultar objetivos, devolviendo promesas.
 
-> **Nota:** Esta interfaz es experimental y todavía no se distribuye con el paquete de Node.js. Para probarla debes clonar el repositorio actual.
-
 ## Tau Prolog utilizando promesas
 
 El paquete `promises` añade tres nuevos méotodos:

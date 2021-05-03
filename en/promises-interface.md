@@ -2,8 +2,6 @@
 
 A promise object represents the eventual completion or failure of an asynchronous operation and its resulting value. Tau Prolog's `promises` package extends the `pl.type.Session` and `pl.type.Thread` prototypes to add new methods for consulting programs and querying goals, returning promises. 
 
-> **Note:** This interface is experimental and is not yet distributed with the Node.js package. To test it you must clone the current repository. 
-
 ## Tau Prolog using promises 
 
 The `promises` package adds three new methods:
