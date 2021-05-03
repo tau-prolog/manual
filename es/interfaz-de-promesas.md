@@ -8,11 +8,11 @@ Una promesa es un objeto que representa la terminación o el fracaso de una oper
 
 El paquete `promises` añade tres nuevos méotodos:
 
-* `asyncConsult`: carga un programa y devuelve una promesa que se resuelve cuando el programa se carga correctamente, o se rechaza cuando hay un error. Recibe los mismos parámetros que el método `consult`.
-* `asyncQuery`: consulta un objetivo y devuelve una promesa que se resuelve cuando el objetivo se carga correctamente, o se rechaza cuando hay un error. Recibe los mismos parámetros que el método `query`.
-* `asyncAnswer`: busca la siguiente respuesta computada y devuelve una promesa que se resuelve cuando encuentra una respuesta o no hay más respuestas, o se rechaza cuando hay un error o se ha llegado al límite de inferencias. Recibe los mismos parámetros que el método `answer`.
+* `promiseConsult`: carga un programa y devuelve una promesa que se resuelve cuando el programa se carga correctamente, o se rechaza cuando hay un error. Recibe los mismos parámetros que el método `consult`.
+* `promiseQuery`: consulta un objetivo y devuelve una promesa que se resuelve cuando el objetivo se carga correctamente, o se rechaza cuando hay un error. Recibe los mismos parámetros que el método `query`.
+* `promiseAnswer`: busca la siguiente respuesta computada y devuelve una promesa que se resuelve cuando encuentra una respuesta o no hay más respuestas, o se rechaza cuando hay un error o se ha llegado al límite de inferencias. Recibe los mismos parámetros que el método `answer`.
 
-Además, añade un cuarto método, `asyncAsnwers`, para buscar todas las respuestas computadas, devolviendo un generador asíncrono.
+Además, añade un cuarto método, `promiseAsnwers`, para buscar todas las respuestas computadas, devolviendo un generador asíncrono.
 
 ```javascript
 const pl = require("tau-prolog");
@@ -26,10 +26,10 @@ require("tau-prolog/modules/promises.js")(pl);
     `;
     const goal = "plus(X, Y, s(s(s(z)))).";
     const session = pl.create();
-    await session.asyncConsult(program);
-    await session.asyncQuery(goal);
+    await session.promiseConsult(program);
+    await session.promiseQuery(goal);
 
-    for await (let answer of session.asyncAnswers())
+    for await (let answer of session.promiseAnswers())
         console.log(session.format_answer(answer));
     // X = z, Y = s(s(s(z))) ;
     // X = s(z), Y = s(s(z)) ;
@@ -56,10 +56,10 @@ require("tau-prolog/modules/promises.js")(pl);
     `;
     const goal = "plus(X, Y, s(s(s(z)))).";
     const session = pl.create();
-    await session.asyncConsult(program);
-    await session.asyncQuery(goal);
+    await session.promiseConsult(program);
+    await session.promiseQuery(goal);
 
-    const plus = Rx.from(session.asyncAnswers());
+    const plus = Rx.from(session.promiseAnswers());
     plus.subscribe(x => console.log(session.format_answer(x)));
     // X = z, Y = s(s(s(z))) ;
     // X = s(z), Y = s(s(z)) ;
