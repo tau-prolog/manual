@@ -9,7 +9,7 @@ Tau Prolog está preparado para ser utilizado tanto en Node.js como en un navega
 Para importar la biblioteca de Tau Prolog, hay que utilizar la función `require` de Node.js:
 
 ```javascript
-var pl = require("tau-prolog");
+const pl = require("tau-prolog");
 ```
 Todos los métodos de Tau Prolog están contenidos en un objeto JavaScript llamado `pl`. Esta variable puede tomar cualquier nombre en Node.js, pero, por compatibilidad con la versión de navegador, se recomienda utilizar el nombre `pl`. A partir de ahora, ya se puede utilizar la biblioteca tal y como se describe en otras secciones del manual *(véase [Un tutorial sencillo](http://tau-prolog.org/manual/es/un-tutorial-sencillo) del manual de Tau Prolog)*, exceptuando la importación de la biblioteca y los módulos de Tau Prolog.
 		
@@ -18,21 +18,21 @@ Todos los métodos de Tau Prolog están contenidos en un objeto JavaScript llama
 Dado que no es posible asegurar que la biblioteca de Tau Prolog esté contenida en el objeto `pl`, al importar un módulo se devolverá una función de carga (un *loader*) que recibirá la referencia a la biblioteca y cargará el módulo correspondiente en ella:
 
 ```javascript
-var pl = require("tau-prolog");
-var loader = require("tau-prolog/modules/lists.js");
+const pl = require("tau-prolog");
+const loader = require("tau-prolog/modules/lists.js");
 loader(pl);
 ```
 Una versión abreviada de esto sería:
 
 ```javascript
-var pl = require("tau-prolog");
+const pl = require("tau-prolog");
 require("tau-prolog/modules/lists.js")(pl);
 ```
 
 Con esto, se han cargado todos los predicados que exportan los módulos importados. En nuestro ejemplo, los predicados del módulo `lists`. Es importante tener en cuenta que en Node.js, el núcleo y cada uno de los módulos deben ser descargados e importados por separado. Por ejemplo, si queremos cargar dos módulos:
 
 ```javascript
-var pl = require("tau-prolog");
+const pl = require("tau-prolog");
 require("tau-prolog/modules/lists.js")(pl);
 require("tau-prolog/modules/random.js")(pl);
 ```

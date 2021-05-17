@@ -9,7 +9,7 @@ Tau Prolog is ready to be used with either Node.js or a browser seamlessly. In t
 In order to import Tau Prolog, we'll use the Node.js function `require`:
 
 ```javascript
-var pl = require("tau-prolog");
+const pl = require("tau-prolog");
 ```
 
 The whole functionality of Tau Prolog is inside a JavaScript object called `pl`. This variable could have any name, but, for the sake of compatibility with the browser version, it is recommended to keep the original name, `pl`. From now on, the library can be used just as it is described in other sections of this manual *(see [A simple tutorial](http://tau-prolog.org/manual/a-simple-tutorial))*, excluding the importation tasks.
@@ -19,22 +19,22 @@ The whole functionality of Tau Prolog is inside a JavaScript object called `pl`.
 Since the Tau Prolog library may not be contained on the `pl` object, importing a module (again with `require`) will return a *loader* function. This function receives a reference to the  library and loads the corresponding module on it:
 
 ```javascript
-var pl = require("tau-prolog");
-var loader = require("tau-prolog/modules/lists.js");
+const pl = require("tau-prolog");
+const loader = require("tau-prolog/modules/lists.js");
 loader(pl);
 ```
 
 A shortened version of that could be:
 
 ```javascript
-var pl = require("tau-prolog");
+const pl = require("tau-prolog");
 require("tau-prolog/modules/lists.js")(pl);
 ```
 
 This way, we've loaded all the exported predicates contained in the imported module. In the previous example, the predicates from the `lists` module have been imported. Please acknowledge that the core of the library and the modules must be downloaded and imported separately. For instance, if we wanted to load two modules:
 
 ```javascript
-var pl = require("tau-prolog");
+const pl = require("tau-prolog");
 require("tau-prolog/modules/lists.js")(pl);
 require("tau-prolog/modules/random.js")(pl);
 ```
