@@ -58,7 +58,7 @@ All of these prototypes share the following methods:
 * `toString()`: Returns a string representation of the object.
 * `clone()`: Returns a copy of the object.
 * `apply(substitution)`: Applies a substitution to the object.
-* `unify(object, occurs_check)`: Returns the most general unifier resulting from unifying both objects if it succeeds, or `null` otherwise. The second argument indicates wheter it must do the occurs check.
+* `unify(object, occurs_check)`: Returns the most general unifier resulting from unifying both objects if it succeeds, or `null` otherwise. The second argument indicates whether it must do the occurs check.
 * `variables()`: Returns a list of the variables contained in the object, if any.
 * `rename(thread)`: Renames the object. Returns an object with fresh variables in `thread`.
 
