@@ -22,14 +22,20 @@ var pl;
 	};
 	// List of predicates exported by the module
 	var exports = ["p/1", "q/2" /** , ... */];
+
+	var options = {
+		// List the dependencies of your module (ie. the 'lists' module)
+		dependencies: ['lists']
+	}
+
 	// DON'T EDIT
 	if( typeof module !== 'undefined' ) {
 		module.exports = function(tau_prolog) {
 			pl = tau_prolog;
-			new pl.type.Module( name, predicates(), exports );
+			new pl.type.Module( name, predicates(), exports, options );
 		};
 	} else {
-		new pl.type.Module( name, predicates(), exports );
+		new pl.type.Module( name, predicates(), exports, options );
 	}
 })( pl );
 ```
